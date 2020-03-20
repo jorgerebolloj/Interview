@@ -27,20 +27,24 @@
 
 			#Procesamiento de número
 			function inputNumber_process($number) {
+				$summation = $number;
 				$continue = 1;
 				$finalString = "";
 
 				do {
 				    $iterations = $iterations + 1;
-					$reverseNumber = inputNumber_reverse($number);
-					$sum = sumNumbers($number, $reverseNumber);
+
+					$reverseNumber = inputNumber_reverse($summation);
+
+					$sum = sumNumbers($summation, $reverseNumber);
+
+
 					$notCapicua = validateNumber($sum);
 
-					$numberIterationsIsCapicua = array($sum, $notCapicua, $iterations); 
+					$numberIterationsIsCapicua = array($sum, $notCapicua); 
 
 					$summation = (int)$numberIterationsIsCapicua[0];
 					$continue = (int)$numberIterationsIsCapicua[1];
-					$iterations = (int)$numberIterationsIsCapicua[2];
 
 					$finalString = $summation." ".$iterations;
 
@@ -60,7 +64,7 @@
 			#Suma de numero dado y número invertido
 			function sumNumbers($number, $reverseNumber) {
 				$sumNumbers = $number + $reverseNumber;
-				return $sumNumbers;
+				return (int)$sumNumbers;
 			}
 
 			#validar si el número sumado es capicúa

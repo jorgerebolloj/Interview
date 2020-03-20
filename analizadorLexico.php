@@ -10,10 +10,12 @@
 	<body>  
 
 		<?php
-			// definiendo variables y seteando valores vacios
+			#Definición de variables y seteo a valores vacios
 			$inputString = "";
 			$output_array = "";
 			$coord1 = $coord2 = $coord3 = "";
+
+			#Validación de campo de entrada
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				if (empty($_POST["inputString"])) {
 					$inputStringErr = "No puede estar vacío el campo de texto";
@@ -24,6 +26,7 @@
 				}
 			}
 
+			#Proceso de análisis del dato de entrada
 			function inputString_process($string) {
 				$inputString = $string;
 
@@ -42,6 +45,7 @@
 				return $resultArray;
 			}
 
+			#Separación de elementos
 			function inputString_validation($string, $lastElement) {
 				if ($lastElement == "") {
 					preg_match('/(([(]\d{2,}[,])(\d*[)])([a-zA-Z0-9()]+)([(]\d{2,}[,]))/', $string, $output_array);
@@ -52,11 +56,13 @@
 				return $output_array;
 			}
 
+			#Formateo de coordenada y sub texto
 			function setCoord($coordA, $coordB, $string, $nextCoord) {
 				$coordString = $coordA.$coordB." ".$string;
 				return $coordString;
 			}
 
+			#Manejo de la cadena de texto para separación de elementos
 			function after($nextCoord, $inputString) {
 		        if (!is_bool(strpos($inputString, $nextCoord))) {
 		        	 $inputString = $nextCoord.substr($inputString, strpos($inputString, $nextCoord)+strlen($nextCoord));
